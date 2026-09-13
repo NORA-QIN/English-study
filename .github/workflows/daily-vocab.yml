@@ -2,9 +2,12 @@ name: Daily Feishu vocabulary
 
 on:
   schedule:
-    # 09:30 Asia/Shanghai = 01:30 UTC
-    - cron: '30 1 * * *'
+    # 09:00 Asia/Shanghai = 01:00 UTC
+    - cron: '0 1 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   send:
@@ -21,3 +24,9 @@ jobs:
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
           FEISHU_RECIPIENT_OPEN_ID: ${{ secrets.FEISHU_RECIPIENT_OPEN_ID }}
         run: python feishu_vocab_push_cloud.py
+      - name: Save vocabulary history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vocab_history.json
+          git diff --cached --quiet || (git commit -m "chore: update vocabulary history" && git push)
