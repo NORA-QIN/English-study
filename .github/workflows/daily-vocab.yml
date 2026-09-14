@@ -2,8 +2,8 @@ name: Daily Feishu vocabulary
 
 on:
   schedule:
-    # 09:00 Asia/Shanghai = 01:00 UTC
-    - cron: '0 1 * * *'
+    # 09:05 Asia/Shanghai = 01:05 UTC
+    - cron: '5 1 * * *'
   workflow_dispatch:
 
 permissions:
