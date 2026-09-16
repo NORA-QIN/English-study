@@ -1,9 +1,6 @@
 name: Daily Feishu vocabulary
 
 on:
-  schedule:
-    # 09:05 Asia/Shanghai = 01:05 UTC
-    - cron: '5 1 * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,7 +10,7 @@ jobs:
   send:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install audio tools
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install Python dependencies
